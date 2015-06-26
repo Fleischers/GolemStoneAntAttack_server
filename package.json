@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/Fleischers/GolemStoneAntAttack_server/issues"
   },
-  "homepage": "https://github.com/Fleischers/GolemStoneAntAttack_server"
+  "homepage": "https://github.com/Fleischers/GolemStoneAntAttack_server",
+  "dependencies": {
+    "js-yaml": "^3.3.1"
+  }
 }
