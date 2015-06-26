@@ -1,0 +1,27 @@
+{
+  "name": "GolemStoneAntAttack_server",
+  "version": "0.0.1",
+  "description": "Game server for arcade shooter",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo 0",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Fleischers/GolemStoneAntAttack_server.git"
+  },
+  "keywords": [
+    "feliss",
+    "weird",
+    "unicorn",
+    "golem",
+    "stone"
+  ],
+  "author": "Glib Ischenko <fcl@gorlifsense.com> (http://fleischer.gorlifsense.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fleischers/GolemStoneAntAttack_server/issues"
+  },
+  "homepage": "https://github.com/Fleischers/GolemStoneAntAttack_server"
+}
