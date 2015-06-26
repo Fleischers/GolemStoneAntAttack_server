@@ -1,6 +1,15 @@
 var net = require('net');
+var yaml = require('js-yaml');
+
 var server = net.createServer();
 var clients = [];
+
+try {
+  var host = yaml.safeLoad(fs.readFileSync('./host.yml', 'utf8'));
+  console.log(host.ip);
+} catch (e) {
+  console.error(e);
+}
 
 server.on('connection', function(socket) {
     console.log('Connection detected');
@@ -32,4 +41,4 @@ server.on('error', function(err) {
     console.error(err);
 });
 
-server.listen(process.env.PORT||4000);
+server.listen((process.env.PORT || 4000), host.ip);
