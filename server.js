@@ -1,4 +1,5 @@
 var net = require('net');
+var fs = require('fs');
 var yaml = require('js-yaml');
 
 var server = net.createServer();
@@ -41,4 +42,4 @@ server.on('error', function(err) {
     console.error(err);
 });
 
-server.listen((process.env.PORT || 4000), host.ip);
+server.listen((process.env.PORT || 4000), process.env.HOST||host.ip);
