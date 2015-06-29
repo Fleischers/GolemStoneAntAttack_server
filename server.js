@@ -19,11 +19,13 @@ function Player(id, nickname, socket) {
     this.id=id;
     this.nickname=nickname;
     this.socket=socket;
-    this.location;
-    this.vector;
-    this.speed;
-    this.acceleration;
-
+    this.location = {};
+    this.vector = {};
+    this.speed = 0.0;
+    this.acceleration = 0.0;
+    this.toString = function toString() {
+        return "id:"+this.id+" nick:"+this.nickname+" location:"+this.location;
+    }
 }
 function Location (x,y,z) {
     this.x=x;
@@ -57,12 +59,20 @@ function sendAllPlayers(socket,str) {
         }
     });
 }
-function findPlayer(playerSocket, players) {
-    players.forEach(function(player) {
+function findPlayer(playerSocket, plys) {
+    var p;
+    plys.forEach(function(player) {
         if (playerSocket === player.socket) {
-            return player;
+            p = player;
         }
+
     });
+    if (!p) {
+        console.err("ERROR: NO PLAYER! Creating new!");
+        return new Player(randomId(), "ERRORed Player", playerSocket);
+    } else {
+        return p;
+    }
 }
 
 server.on('connection', function(socket) {
@@ -135,8 +145,7 @@ server.on('connection', function(socket) {
             console.error("No API for this call");
             clients.forEach(function(client) {
                 if (client != socket) {
-                    client.write(data);
-                    client.write();
+                    client.write("ERROR|"+data);
                 }
             });
         }
