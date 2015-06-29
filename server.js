@@ -68,7 +68,7 @@ function findPlayer(playerSocket, players) {
 server.on('connection', function(socket) {
     console.log('Connection detected');
     socket.setEncoding('utf8');
-    socket.setNodelay(true);
+    socket.setNoDelay(true);
     clients.push(socket);
     clients.forEach(function(c){
         c.write("Connected users: " + clients.length + "\n");
