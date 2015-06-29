@@ -1,6 +1,4 @@
 var net = require('net');
-var fs = require('fs');
-var yaml = require('js-yaml');
 var crypto = require('crypto');
 
 function randomId (len) {
@@ -33,13 +31,6 @@ function Vector (x,y,z) {
     this.x=x;
     this.y=y;
     this.z=z;
-}
-
-try {
-  var host = yaml.safeLoad(fs.readFileSync('./host.yml', 'utf8'));
-  console.log(host.ip);
-} catch (e) {
-  console.error(e);
 }
 
 function sendAll(socket,str) {
@@ -117,7 +108,9 @@ server.on('error', function(err) {
     console.error(err);
 });
 
-server.listen((process.env.PORT || 4000), process.env.HOST||host.ip);
+var port = process.env.PORT || 4000,
+    host = process.env.HOST || "localhost";
+server.listen(port, host);
 server.on('listening', function(){
-    console.log("Server is listening");
+    console.log("Server is listening to " +  host + ":" + port);
 });

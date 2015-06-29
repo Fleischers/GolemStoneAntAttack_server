@@ -1,4 +1,6 @@
-To launch server `npm start`
+To launch server:
+`npm update`
+`npm start`
 
 You can review Unreal Engine 4 client code in the following repository: https://github.com/Feliss/GolemStoneAntAttack_client
 
