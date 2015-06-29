@@ -19,19 +19,29 @@ function Player(id, nickname, socket) {
     this.id=id;
     this.nickname=nickname;
     this.socket=socket;
-    this.loc;
-    this.vec;
+    this.location;
+    this.vector;
+    this.speed;
+    this.acceleration;
+
 }
 function Location (x,y,z) {
     this.x=x;
     this.y=y;
     this.z=z;
+    this.toString = function toString() {
+        return this.x + "|" + this.y + "|" + this.z;
+    }
 }
 function Vector (x,y,z) {
     this.x=x;
     this.y=y;
     this.z=z;
+
 }
+Vector.prototype.toString = function () {
+    return this.x + "|" + this.y + "|" + this.z;
+};
 
 function sendAll(socket,str) {
     clients.forEach(function(client) {
@@ -40,10 +50,25 @@ function sendAll(socket,str) {
         }
     });
 }
+function sendAllPlayers(socket,str) {
+    players.forEach(function(p) {
+        if (p.socket != socket) {
+            p.socket.write(str);
+        }
+    });
+}
+function findPlayer(playerSocket, players) {
+    players.forEach(function(player) {
+        if (playerSocket === player.socket) {
+            return player;
+        }
+    });
+}
 
 server.on('connection', function(socket) {
     console.log('Connection detected');
     socket.setEncoding('utf8');
+    socket.setNodelay(true);
     clients.push(socket);
     clients.forEach(function(c){
         c.write("Connected users: " + clients.length + "\n");
@@ -56,38 +81,62 @@ server.on('connection', function(socket) {
                 var p = new Player(randomId(), messages[1], socket);
                 players.push(p);
                 socket.write('CONNECTED'+'|'+p.id);
-                sendAll(socket, p.id+'|'+"CONNECTED"+'|'+p.nickname);
+                sendAllPlayers(socket, p.id+'|'+"CONNECTED"+'|'+p.nickname);
                 break;
             case 'LOCATION':
                 var loc = new Location(messages[1],messages[2],messages[3]);
-
+                var p = findPlayer(socket, players);
+                p.location = loc;
+                sendAllPlayers(socket, p.id + "|LOCATION|" + p.location.x + '|' + p.location.y + '|' + p.location.z);
                 break;
             case 'MOVE':
-
+                var vector = new Vector(messages[1],messages[2],messages[3]);
+                var p = findPlayer(socket, players);
+                p.speed = messages[4];
+                p.acceleration = messages[5];
+                p.vector = vector;
+                sendAllPlayers(socket, p.id + "|MOVE|" + p.vector + "|" + p.speed + "|" + p.acceleration);
                 break;
             case 'STOP':
-
+                var loc = new Location(messages[1],messages[2],messages[3]);
+                var p = findPlayer(socket, players);
+                p.location = loc;
+                sendAllPlayers(socket, p.id + "|STOP|" + p.location);
                 break;
             case 'PICK':
-
+                var p = findPlayer(socket, players);
+                sendAllPlayers(socket, p.id + "|" + "PICK");
                 break;
             case 'THROW':
-
+                var vector = new Vector(messages[1],messages[2],messages[3]);
+                var p = findPlayer(socket, players);
+                p.speed = messages[4];
+                p.acceleration = messages[5];
+                p.vector = vector;
+                sendAllPlayers(socket, p.id + "|THROW|" + p.vector + "|" + p.speed + "|" + p.acceleration);
                 break;
             case 'HIT':
-
+                var p = findPlayer(socket, players);
+                sendAllPlayers(socket, p.id + "|" + "HIT");
                 break;
             case 'DEATH':
-
+                var p = findPlayer(socket, players);
+                sendAllPlayers(socket, p.id + "|" + "DEATH");
+                break;
+            case 'REVIVE':
+                var p = findPlayer(socket, players);
+                sendAllPlayers(socket, p.id + "|" + "REVIVE");
                 break;
             case 'DISCONNECT':
-
+                var p = findPlayer(socket, players);
+                sendAllPlayers(socket, p.id + "|" + "DISCONNECT");
                 break;
-
             default:
+            console.error("No API for this call");
             clients.forEach(function(client) {
                 if (client != socket) {
                     client.write(data);
+                    client.write();
                 }
             });
         }

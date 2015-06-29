@@ -1,11 +1,21 @@
-To launch server:
-`npm update`
-`npm start`
+# Golem Stone: Ant Attack
 
+This repository stands for game server written in Node.js
 You can review Unreal Engine 4 client code in the following repository: https://github.com/Feliss/GolemStoneAntAttack_client
 
-Client to server:
-=================================================================
+## Installation and setup
+
+To install and launch server:
+
+`npm update`  
+`npm start`
+
+It will then listen for incoming TCP messages.
+
+## TCP API
+
+### Client to server:
+
 ```
 CONNECT|NICKNAME
 LOCATION|X|Y|Z
@@ -18,8 +28,8 @@ DEATH
 DISCONNECT
 ```
 
-Server to client:
-=================================
+### Server to client:
+
 ```
 CONNECTED|PLAYER_ID
 PLAYER_ID|CONNECTED|NICKNAME
