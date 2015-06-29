@@ -84,7 +84,7 @@ server.on('connection', function(socket) {
         c.write("Connected users: " + clients.length + "\n");
     });
     socket.on('data', function(data) {
-        console.log(data);
+        console.log(">" + data);
         var messages = data.split('|');
         switch (messages[0]) {
             case 'CONNECT':
@@ -143,11 +143,7 @@ server.on('connection', function(socket) {
                 break;
             default:
             console.error("No API for this call");
-            clients.forEach(function(client) {
-                if (client != socket) {
-                    client.write("ERROR|"+data);
-                }
-            });
+            socket.write("ERROR|"+data);
         }
 
     });

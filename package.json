@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Fleischers/GolemStoneAntAttack_server",
   "dependencies": {
-    "js-yaml": "^3.3.1"
+    "js-yaml": "^3.3.1",
+    "mocha": "^2.2.5"
   }
 }
