@@ -12,7 +12,7 @@ To install and launch server:
 
 It will then listen for incoming socket messages.
 
-## TCP API
+## API
 
 ### Client to server:
 
@@ -43,3 +43,7 @@ PLAYER_ID|DEATH
 PLAYER_ID|REVIVE
 PLAYER_ID|DISCONNECT
 ```
+
+## License
+
+Copyright 2015 Glib Ischenko
