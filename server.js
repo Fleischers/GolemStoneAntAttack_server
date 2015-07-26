@@ -85,7 +85,8 @@ server.on('connection', function(socket) {
     socket.setNoDelay(true);
     clients.push(socket);
     clients.forEach(function(c){
-        c.write("Connected users: " + clients.length + "\n");
+        // c.write("Connected users: " + clients.length + "\n");
+        console.log("Connected users: " + clients.length + "\n");
     });
     socket.on('data', function(data) {
         console.log(">" + data);
