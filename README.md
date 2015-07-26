@@ -43,7 +43,3 @@ PLAYER_ID|DEATH
 PLAYER_ID|REVIVE
 PLAYER_ID|DISCONNECT
 ```
-
-## License
-
-Copyright 2015 Glib Ischenko
