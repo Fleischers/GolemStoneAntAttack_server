@@ -1,10 +1,10 @@
 {
   "name": "GolemStoneAntAttack_server",
-  "version": "0.1.3",
-  "description": "Game server for arcade shooter",
-  "main": "server.js",
+  "version": "0.2.0",
+  "description": "Game server for arcade shooter Ant Attack",
+  "main": "index.js",
   "scripts": {
-    "test": "echo 0",
+    "test": "node_modules/mocha/bin/mocha test",
     "start": "node server.js"
   },
   "repository": {
@@ -24,8 +24,14 @@
     "url": "https://github.com/Fleischers/GolemStoneAntAttack_server/issues"
   },
   "homepage": "https://github.com/Fleischers/GolemStoneAntAttack_server",
-  "dependencies": {
-    "js-yaml": "^3.3.1",
+  "devDependencies": {
+    "socket.io-client": "^1.3.6",
+    "should": "^7.0.2",
+    "nconf": "^0.7.1",
     "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "socket.io": "^1.3.6",
+    "winston": "^1.0.1"
   }
 }

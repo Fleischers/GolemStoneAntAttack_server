@@ -1,9 +1,13 @@
+// jshint node: true
+
+'use strict';
+
 var net = require('net');
 var crypto = require('crypto');
 
 function randomId (len) {
     if (!len) {
-        var len = 4;
+        len = 4;
     }
     return crypto.randomBytes(Math.ceil(len/2))
         .toString('hex') // convert to hexadecimal format
@@ -25,7 +29,7 @@ function Player(id, nickname, socket) {
     this.acceleration = 0.0;
     this.toString = function toString() {
         return "id:"+this.id+" nick:"+this.nickname+" location:"+this.location;
-    }
+    };
 }
 function Location (x,y,z) {
     this.x=x;
@@ -33,7 +37,7 @@ function Location (x,y,z) {
     this.z=z;
     this.toString = function toString() {
         return this.x + "|" + this.y + "|" + this.z;
-    }
+    };
 }
 function Vector (x,y,z) {
     this.x=x;

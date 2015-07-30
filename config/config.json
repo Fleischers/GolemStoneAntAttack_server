@@ -1,0 +1,6 @@
+{
+    "test": {
+        "host": "localhost",
+        "port": 4001
+    }
+}

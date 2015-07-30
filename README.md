@@ -7,12 +7,15 @@ You can review Unreal Engine 4 client code in the following repository: https://
 
 To install and launch server:
 
-`npm update`  
+`npm install`
 `npm start`
 
-It will then listen for incoming TCP messages.
+It will then listen for incoming socket messages.
 
-## TCP API
+## Connection
+You can connect to server published on Heroku VM: http://antattack.herokuapp.com/
+
+## API
 
 ### Client to server:
 
