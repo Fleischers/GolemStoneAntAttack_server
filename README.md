@@ -12,6 +12,9 @@ To install and launch server:
 
 It will then listen for incoming socket messages.
 
+## Connection
+You can connect to server published on Heroku VM: http://antattack.herokuapp.com/
+
 ## API
 
 ### Client to server:
