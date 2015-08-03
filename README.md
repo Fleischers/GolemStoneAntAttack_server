@@ -1,4 +1,5 @@
 # Golem Stone: Ant Attack
+[![Build Status](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server.svg?branch=8-create-routes-with-express-on)](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server)
 
 This repository stands for game server written in Node.js.  
 You can review Unreal Engine 4 client code in the following repository: https://github.com/Feliss/GolemStoneAntAttack_client
