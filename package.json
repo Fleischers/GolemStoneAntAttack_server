@@ -24,6 +24,7 @@
   ],
   "author": "Glib Ischenko <fcl@gorlifsense.com> (http://fleischer.gorlifsense.com)",
   "license": "ISC",
+  "private": true,
   "bugs": {
     "url": "https://github.com/Fleischers/GolemStoneAntAttack_server/issues"
   },
