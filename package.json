@@ -4,7 +4,11 @@
   "description": "Game server for arcade shooter Ant Attack",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha test",
+    "preversion": "npm test",
+    "version": "npm run build && git add --all",
+    "postversion": "git push && git push --tags",
+    "build": "echo no_build",
+    "test": "mocha",
     "start": "node index.js"
   },
   "repository": {
