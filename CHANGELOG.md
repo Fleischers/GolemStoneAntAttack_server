@@ -1,3 +1,10 @@
+0.3.1
+==========
+* Added Logentries
+* Published to Heroku.
+* Now can connect to http://antattack.herokuapp.com/ with Websockets
+* Added route for /game and /chat
+
 0.3.0
 ==========
 * Added Express web server. README served as static file on '/'
