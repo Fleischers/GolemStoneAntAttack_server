@@ -19,7 +19,9 @@ config.file('./config/config.json').argv();
 // var host = config.get('host') || 'localhost';
 
 // 4001 port was once used as TCP port for "Microsoft Ants" game
-var port = config.get('port') || 4001,
+var DEFAULT_PORT = 4001;
+
+var port = process.env.PORT || config.get('port') || DEFAULT_PORT,
     app = express(),
     server = http.Server(app),
     io = socketIo(server);
