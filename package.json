@@ -1,13 +1,12 @@
 {
   "name": "GolemStoneAntAttack_server",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Game server for arcade shooter Ant Attack",
   "main": "index.js",
   "scripts": {
     "preversion": "npm test",
-    "version": "npm run build && git add --all",
+    "version": "git status",
     "postversion": "git push && git push --tags",
-    "build": "echo no_build",
     "test": "mocha",
     "start": "node index.js"
   },
@@ -24,6 +23,7 @@
   ],
   "author": "Glib Ischenko <fcl@gorlifsense.com> (http://fleischer.gorlifsense.com)",
   "license": "ISC",
+  "private": true,
   "bugs": {
     "url": "https://github.com/Fleischers/GolemStoneAntAttack_server/issues"
   },
@@ -35,6 +35,9 @@
   },
   "dependencies": {
     "async": "^1.4.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "le_node": "^1.0.12",
     "lodash": "^3.10.0",
     "nconf": "^0.7.1",
     "socket.io": "^1.3.6",

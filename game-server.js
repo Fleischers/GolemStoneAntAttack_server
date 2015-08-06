@@ -42,6 +42,12 @@ function route(messageParts, socket, callback) {
             broadcast = (socket, p.id + '|MOVE|' + p.vector + '|' + p.speed +
                 '|' + p.acceleration);
             break;
+        case 'ROTATE':
+            vector = new Vector(messageParts[1], messageParts[2], messageParts[3]);
+            p = findPlayer(socket, gameServer.players);
+            p.rotateVector = vector;
+            broadcast = (socket, p.id + '|MOVE|' + p.rotateVector);
+            break;
         case 'STOP':
             loc = new Location(messageParts[1], messageParts[2], messageParts[3]);
             p = findPlayer(socket, gameServer.players);

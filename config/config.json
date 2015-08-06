@@ -1,4 +1,9 @@
 {
     "host": "localhost",
-    "port": 4001
+    "port": 4001,
+    "logentries": {
+        "enabled": false,
+        "token": "",
+        "level": "debug"
+    }
 }
