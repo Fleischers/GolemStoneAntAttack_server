@@ -9,12 +9,28 @@ var winston = require('winston'),
     http = require('http'),
     socketIo = require('socket.io'),
     config = require('nconf');
+var Logger = require('le_node');
 
 // local require
 var gameServer = require('./game-server');
 
+
 //TODO change to index.js inside config directory
 config.file('./config/config.json').argv();
+
+// TODO add possibility to not work with logentries
+if (process.env.LOGENTRIES || config.get('logentries:enabled')) {
+    winston.add(winston.transports.Logentries, {
+            token: process.env.LOGENTRIES || config.get('logentries:token')
+        });
+} else {
+    winston.remove(winston.transports.Console);
+    winston.add(winston.transports.Console, {
+        level: 'info',
+        colorize: true,
+        humanReadableUnhandledException: true
+    });
+}
 
 // var host = config.get('host') || 'localhost';
 
@@ -41,6 +57,12 @@ var logLevels = {
         // четыре я стрелы пущу и четверым я отомщу
     },
     colors: {
+        silly: 'grey',
+        verbose: 'cyan',
+        debug: 'green',
+        info: 'blue',
+        warn: 'yellow',
+        error: 'red',
         arrow: 'red'
     }
 };
@@ -49,18 +71,21 @@ var vigilante = new (winston.Logger)({
     levels: logLevels.levels,
     colors: logLevels.colors
 });
+
 winston.addColors(logLevels.colors);
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/README.md');
+    res.sendFile(__dirname + '/README.md');
 });
 
 app.get('/chat', function (req, res) {
-  res.send('Here should be a chat');
+    res.send('Here should be a chat');
+    winston.warn('No chat! Someone trying to find it');
 });
 
 app.get('/game', function (req, res) {
     res.send('Here should be the game');
+    winston.debug(req);
 });
 
 io.on('connection', function (socket) {

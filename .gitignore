@@ -2,5 +2,8 @@
 logs
 *.log
 
+# Local config
+config/config.local.json
+
 # Dependency directory
 node_modules
