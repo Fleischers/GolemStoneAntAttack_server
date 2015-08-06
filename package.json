@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "preversion": "npm test",
-    "version": "npm run build && git add --all",
+    "version": "git status",
     "postversion": "git push && git push --tags",
-    "build": "echo no_build",
     "test": "mocha",
     "start": "node index.js"
   },
@@ -36,6 +35,8 @@
   },
   "dependencies": {
     "async": "^1.4.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
     "lodash": "^3.10.0",
     "nconf": "^0.7.1",
     "socket.io": "^1.3.6",

@@ -2,16 +2,33 @@
 
 'use strict';
 
+// global require
 var winston = require('winston'),
-    router = require('./game-server'),
+    express = require('express'),
+    cors = require('cors'),
+    http = require('http'),
+    socketIo = require('socket.io'),
     config = require('nconf');
+
+// local require
+var gameServer = require('./game-server');
 
 //TODO change to index.js inside config directory
 config.file('./config/config.json').argv();
 
+// var host = config.get('host') || 'localhost';
+
 // 4001 port was once used as TCP port for "Microsoft Ants" game
 var port = config.get('port') || 4001,
-    io = require('socket.io')(port);
+    app = express(),
+    server = http.Server(app),
+    io = socketIo(server);
+
+app.use(cors()); // enable CORS rules
+
+server.listen(port, function () {
+    winston.info('Ant Attack web server is listening on port %d', port);
+});
 
 // set custom log levels
 var logLevels = {
@@ -32,13 +49,17 @@ var vigilante = new (winston.Logger)({
 });
 winston.addColors(logLevels.colors);
 
+app.get('/', function (req, res) {
+  res.sendFile(__dirname + '/README.md');
+});
+
 io.on('connection', function (socket) {
     winston.info('Connection detected');
     // socket.setNoDelay(true); // disable Nagle's algorithm
     socket.on('message', function (message) {
 
         winston.info('-> incoming message: %s', message);
-        router.processMessage(message, socket, function (err, response, broadcast) {
+        gameServer.processMessage(message, socket, function (err, response, broadcast) {
             if (err) {
                 winston.warn('<- outgoing message: %s', err);
                 socket.write(err);
@@ -63,7 +84,7 @@ io.on('listen', function () {
 });
 
 io.on('error', function (error) {
-    // speaks holding a bow in his hands:
+    // speaks while holding a bow in his hands:
     vigilante.arrow('You have failed this server!');
     throw error;
 });
