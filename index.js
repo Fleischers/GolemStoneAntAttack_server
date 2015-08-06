@@ -14,20 +14,22 @@ var winston = require('winston'),
 var gameServer = require('./game-server');
 
 //TODO change to index.js inside config directory
-config.file('./config/config.json').argv();
+// config.file('./config/config.json').argv();
 
 // var host = config.get('host') || 'localhost';
+winston.info('before express server created');
 
 // 4001 port was once used as TCP port for "Microsoft Ants" game
 var DEFAULT_PORT = 4001;
 
-var port = process.env.PORT || config.get('port') || DEFAULT_PORT,
+var port = process.env.PORT,// || config.get('port') || DEFAULT_PORT,
     app = express(),
     server = http.Server(app),
     io = socketIo(server);
 
 app.use(cors()); // enable CORS rules
 
+winston.info('before server listening');
 server.listen(port, function () {
     winston.info('Ant Attack web server is listening on port %d', port);
 });
