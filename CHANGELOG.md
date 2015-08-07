@@ -1,3 +1,9 @@
+0.3.2
+==========
+* Added favicon.ico serve for browser
+* All http requests logged in debug level
+* Added json answer for 404 http code
+
 0.3.1
 ==========
 * Added Logentries

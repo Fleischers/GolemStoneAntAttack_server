@@ -4,6 +4,7 @@
     "logentries": {
         "enabled": false,
         "token": "",
-        "level": "debug"
-    }
+        "level": "info"
+    },
+    "loglevel": "debug"
 }
