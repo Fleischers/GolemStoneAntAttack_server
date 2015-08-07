@@ -5,6 +5,8 @@
 // global require
 var winston = require('winston'),
     express = require('express'),
+    favicon = require('serve-favicon'),
+    boom = require('express-boom'),
     cors = require('cors'),
     http = require('http'),
     socketIo = require('socket.io'),
@@ -26,7 +28,7 @@ if (process.env.LOGENTRIES || config.get('logentries:enabled')) {
 } else {
     winston.remove(winston.transports.Console);
     winston.add(winston.transports.Console, {
-        level: 'info',
+        level: config.get('loglevel'),
         colorize: true,
         humanReadableUnhandledException: true
     });
@@ -42,7 +44,13 @@ var port = process.env.PORT || config.get('port') || DEFAULT_PORT,
     server = http.Server(app),
     io = socketIo(server);
 
+app.use(favicon(__dirname + '/favicon.ico'));
 app.use(cors()); // enable CORS rules
+app.use(boom());
+
+function notFound(req, res) {
+    res.boom.notFound(); // Responsds with a 404 status code
+}
 
 server.listen(port, function () {
     winston.info('Ant Attack web server is listening on port %d', port);
@@ -74,6 +82,11 @@ var vigilante = new (winston.Logger)({
 
 winston.addColors(logLevels.colors);
 
+app.use(function (req, res, next) {
+    winston.info('HTTP request', req.ip, req.method, req.url);
+    next();
+});
+
 app.get('/', function (req, res) {
     res.sendFile(__dirname + '/README.md');
 });
@@ -88,8 +101,12 @@ app.get('/game', function (req, res) {
     winston.debug(req);
 });
 
+app.use(function (req, res) {
+    res.boom.notFound(); // Responsds with a 404 status code
+});
+
 io.on('connection', function (socket) {
-    winston.info('Connection detected');
+    winston.info('SOCKET Connection detected');
     // socket.setNoDelay(true); // disable Nagle's algorithm
     socket.on('message', function (message) {
 
@@ -110,7 +127,7 @@ io.on('connection', function (socket) {
         });
     });
     socket.on('disconnect', function () {
-        winston.info('client disconnected');
+        winston.info('SOCKET client disconnected');
     });
 });
 
