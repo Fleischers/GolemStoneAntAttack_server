@@ -23,7 +23,7 @@ You can connect to server published on Heroku VM: http://antattack.herokuapp.com
 **x, y, z,** *{double}* - static coordinates  
 **vecX, vecY, vecZ** *{double}* - Vector3 Object  
 **playerId** *{string}* - unique player id, for example `xf8i`  
-**nickname** *{string}* - any player username
+**nickname** *{string}* - any player username  
 **speed** *{double}* - player speed  
 **acceleration** *{double}* - player acceleration
 
