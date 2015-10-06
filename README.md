@@ -1,6 +1,6 @@
 # Golem Stone: Ant Attack
-[![Build Status](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server.svg?branch=8-create-routes-with-express-on)](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server)
-![dependencies](https://david-dm.org/Fleischers/GolemStoneAntAttack_server.svg)
+[![Build Status](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server.svg)](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server)
+[![dependencies](https://david-dm.org/Fleischers/GolemStoneAntAttack_server.svg)](https://david-dm.org/Fleischers/GolemStoneAntAttack_server)
 
 This repository stands for game server written in Node.js.    
 
@@ -22,17 +22,32 @@ It will then listen for incoming socket messages.
 You can connect to server published on Heroku VM: http://antattack.herokuapp.com/
 
 ## API
+**Notes on variable types:**
+
+**x, y, z,** *{double}* - static coordinates  
+**vecX, vecY, vecZ** *{double}* - Vector3 Object  
+**playerId** *{string}* - unique player id, for example `xf8i`  
+**nickname** *{string}* - any player username  
+**speed** *{double}* - player speed  
+**acceleration** *{double}* - player acceleration
+
+**|** is delimiter inside message to be able to parse properties  
+**~** is delimiter between messages (mark the end of message)
+
+All other are big CONSTANT strings which are special actions.  
+
 
 ### Client to server:
 
 ```
-CONNECT|NICKNAME~
-LOCATION|X|Y|Z~
-MOVE|X|Y|Z|SPEED|ACCELERATION~
-STOP|X|Y|Z~
+CONNECT|nickname~
+LOCATION|x|y|z~
+MOVE|vecX|vecY|vecZ|speed|acceleration~
+ROTATION|vecX|vecY|vecZ~
+STOP|x|y|z~
 PICK~
-THROW|X|Y|Z|SPEED|ACCELERATION~
-HIT|PLAYER_ID~
+THROW|vecX|vecY|vecZ|speed|acceleration~
+HIT|playerId~
 DEATH~
 DISCONNECT~
 ```
@@ -40,15 +55,15 @@ DISCONNECT~
 ### Server to client:
 
 ```
-CONNECTED|PLAYER_ID~
-PLAYER_ID|CONNECTED|NICKNAME~
-PLAYER_ID|LOCATION|X|Y|Z~
-PLAYER_ID|MOVE|X|Y|Z|SPEED|ACCELERATION~
-PLAYER_ID|STOP|X|Y|Z~
-PLAYER_ID|PICK~
-PLAYER_ID|THROW|X|Y|Z|SPEED|ACCELERATION~
-PLAYER_ID|HIT~
-PLAYER_ID|DEATH~
-PLAYER_ID|REVIVE~
-PLAYER_ID|DISCONNECT~
+CONNECTED|playerId~
+playerId|CONNECTED|nickname~
+playerId|LOCATION|x|y|z~
+playerId|MOVE|vecX|vecY|vecZ|speed|acceleration~
+playerId|STOP|x|y|z~
+playerId|PICK~
+playerId|THROW|vecX|vecY|vecZ|speed|acceleration~
+playerId|HIT~
+playerId|DEATH~
+playerId|REVIVE~
+playerId|DISCONNECT~
 ```
