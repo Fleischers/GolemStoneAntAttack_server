@@ -1,6 +1,8 @@
 0.3.3
 ==========
-
+* Changed template engine to support markdown and give away HTML for README.md
+* Updated node -v for travis-ci
+* Update dependencies versions
 
 0.3.2
 ==========

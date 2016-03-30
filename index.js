@@ -87,8 +87,9 @@ app.use(function (req, res, next) {
     next();
 });
 
+app.engine('md', require('marked-engine').renderFile);
 app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/README.md');
+    res.render(__dirname + '/README.md');
 });
 
 app.get('/chat', function (req, res) {

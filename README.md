@@ -5,9 +5,9 @@
 This repository stands for game server written in Node.js.    
 
 You can review Unreal Engine 4 client code in the following repository:  
-https://github.com/Feliss/GolemStoneAntAttack_client  
+[GolemStoneAntAttack_client](https://github.com/Feliss/GolemStoneAntAttack_client)  
 Browser client code can be found here:   
-https://github.com/Belrestro/GolemStoneAntAttack_browser
+[GolemStoneAntAttack_browser](https://github.com/Belrestro/GolemStoneAntAttack_browser)
 
 ## Installation and setup
 
@@ -19,7 +19,8 @@ To install and launch server:
 It will then listen for incoming socket messages.
 
 ## Connection
-You can connect to server published on Heroku VM: http://antattack.herokuapp.com/
+You can connect to server published on Heroku VM:  
+[Demo server](http://antattack.herokuapp.com/)
 
 ## API
 **Notes on variable types:**
@@ -40,30 +41,30 @@ All other are big CONSTANT strings which are special actions.
 ### Client to server:
 
 ```
-CONNECT|nickname~
-LOCATION|x|y|z~
-MOVE|vecX|vecY|vecZ|speed|acceleration~
-ROTATION|vecX|vecY|vecZ~
-STOP|x|y|z~
-PICK~
-THROW|vecX|vecY|vecZ|speed|acceleration~
-HIT|playerId~
-DEATH~
-DISCONNECT~
+CONNECT|nickname~  
+LOCATION|x|y|z~  
+MOVE|vecX|vecY|vecZ|speed|acceleration~  
+ROTATION|vecX|vecY|vecZ~  
+STOP|x|y|z~  
+PICK~  
+THROW|vecX|vecY|vecZ|speed|acceleration~  
+HIT|playerId~  
+DEATH~  
+DISCONNECT~  
 ```
 
 ### Server to client:
 
 ```
-CONNECTED|playerId~
-playerId|CONNECTED|nickname~
-playerId|LOCATION|x|y|z~
-playerId|MOVE|vecX|vecY|vecZ|speed|acceleration~
-playerId|STOP|x|y|z~
-playerId|PICK~
-playerId|THROW|vecX|vecY|vecZ|speed|acceleration~
-playerId|HIT~
-playerId|DEATH~
-playerId|REVIVE~
-playerId|DISCONNECT~
+CONNECTED|playerId~  
+playerId|CONNECTED|nickname~  
+playerId|LOCATION|x|y|z~  
+playerId|MOVE|vecX|vecY|vecZ|speed|acceleration~  
+playerId|STOP|x|y|z~  
+playerId|PICK~  
+playerId|THROW|vecX|vecY|vecZ|speed|acceleration~  
+playerId|HIT~  
+playerId|DEATH~  
+playerId|REVIVE~  
+playerId|DISCONNECT~  
 ```
