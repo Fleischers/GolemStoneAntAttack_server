@@ -1,12 +1,14 @@
 # Golem Stone: Ant Attack
+
 [![Build Status](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server.svg)](https://travis-ci.org/Fleischers/GolemStoneAntAttack_server)
 [![dependencies](https://david-dm.org/Fleischers/GolemStoneAntAttack_server.svg)](https://david-dm.org/Fleischers/GolemStoneAntAttack_server)
 
 This repository stands for game server written in Node.js.    
 
 You can review Unreal Engine 4 client code in the following repository:  
-[GolemStoneAntAttack_client](https://github.com/Feliss/GolemStoneAntAttack_client)  
-Browser client code can be found here:   
+[GolemStoneAntAttack_client](https://github.com/Feliss/GolemStoneAntAttack_client)
+
+Browser client code can be found here:  
 [GolemStoneAntAttack_browser](https://github.com/Belrestro/GolemStoneAntAttack_browser)
 
 ## Installation and setup
@@ -19,10 +21,12 @@ To install and launch server:
 It will then listen for incoming socket messages.
 
 ## Connection
-You can connect to server published on Heroku VM:  
+
+You can connect to server published on Heroku VM:
 [Demo server](http://antattack.herokuapp.com/)
 
 ## API
+
 **Notes on variable types:**
 
 **x, y, z,** *{double}* - static coordinates  
@@ -37,10 +41,9 @@ You can connect to server published on Heroku VM:
 
 All other are big CONSTANT strings which are special actions.  
 
+### Client to server
 
-### Client to server:
-
-```
+``` text
 CONNECT|nickname~  
 LOCATION|x|y|z~  
 MOVE|vecX|vecY|vecZ|speed|acceleration~  
@@ -53,9 +56,9 @@ DEATH~
 DISCONNECT~  
 ```
 
-### Server to client:
+### Server to client
 
-```
+``` text
 CONNECTED|playerId~  
 playerId|CONNECTED|nickname~  
 playerId|LOCATION|x|y|z~  

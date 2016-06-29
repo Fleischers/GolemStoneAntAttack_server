@@ -11,7 +11,6 @@ var winston = require('winston'),
     http = require('http'),
     socketIo = require('socket.io'),
     config = require('nconf');
-var Logger = require('le_node');
 
 // local require
 var gameServer = require('./game-server');
@@ -47,10 +46,6 @@ var port = process.env.PORT || config.get('port') || DEFAULT_PORT,
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(cors()); // enable CORS rules
 app.use(boom());
-
-function notFound(req, res) {
-    res.boom.notFound(); // Responsds with a 404 status code
-}
 
 server.listen(port, function () {
     winston.info('Ant Attack web server is listening on port %d', port);

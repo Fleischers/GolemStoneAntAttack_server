@@ -1,6 +1,3 @@
-// jshint node: true
-// jshint mocha: true
-
 'use strict';
 
 var config = require('nconf'),

@@ -1,0 +1,5 @@
+root: true
+extends: eslint:recommended
+env:
+  mocha: true
+  node: true

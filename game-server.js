@@ -1,10 +1,7 @@
-// jshint node: true
-
 'use strict';
 
 var winston = require('winston'),
-    _ = require('lodash'),
-    async = require('async');
+    _ = require('lodash');
 
 var gameServer;
 var DELIMITER = '~';
@@ -134,23 +131,6 @@ function Vector(x, y, z) {
     this.toString = function () {
         return this.x + '|' + this.y + '|' + this.z;
     };
-}
-
-
-function sendAll(clients, socket, str) {
-    clients.forEach(function (client) {
-        if (client != socket) {
-            client.write(str);
-        }
-    });
-}
-
-function sendAllPlayers(players, socket, str) {
-    players.forEach(function (p) {
-        if (p.socket != socket) {
-            p.socket.write(str);
-        }
-    });
 }
 
 function findPlayer(playerSocket, plys) {
