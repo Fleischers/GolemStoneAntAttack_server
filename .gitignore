@@ -2,6 +2,7 @@
 logs
 *.log
 
+
 # Local config
 config/config.local.json
 
