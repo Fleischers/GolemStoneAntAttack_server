@@ -1,10 +1,10 @@
 {
   "name": "GolemStoneAntAttack_server",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Game server for arcade shooter Ant Attack",
   "main": "index.js",
   "engines": {
-    "node": ">=0.12",
+    "node": ">=4.8.4",
     "npm": ">=3"
   },
   "scripts": {
