@@ -142,7 +142,7 @@ function findPlayer(playerSocket, plys) {
 
     });
     if (!p) {
-        winston.error('ERROR: NO PLAYER! Creating new!');
+        winston.error('ERROR: NO PLAYER! Creating new!'); // TODO change from Error to info level
         return new Player(gameServer.idCounter, 'ERRORed Player', playerSocket); //TODO
     } else {
         return p;
